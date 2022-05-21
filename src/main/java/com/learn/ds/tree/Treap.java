@@ -88,6 +88,18 @@ public class Treap {
         }
     }
 
+    public TreapNode merge(TreapNode first, TreapNode second) {
+        if(first == null || second == null) return first == null ? second : first;
+
+        if(first.priority > second.priority) {
+            first.right = merge(first.right, second);
+            return first;
+        } else {
+            second.left = merge(first, second.left);
+            return second;
+        }
+    }
+
     /*
     T1, T2 and T3 are subtrees of the tree rooted with y (on left side) or x (on right side)
                 y                               x
