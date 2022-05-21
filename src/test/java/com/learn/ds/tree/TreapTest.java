@@ -61,4 +61,26 @@ class TreapTest {
         System.out.println("================");
         treap.preorder(splitted.getSecond());
     }
+
+    @Test
+    public void shouldMergeSimpleTree() {
+        final Treap treap = new Treap();
+        TreapNode root = new TreapNode(50);
+        root = treap.insert(root, 20);
+        root = treap.insert(root, 30);
+        root = treap.insert(root, 40);
+        root = treap.insert(root, 70);
+        root = treap.insert(root, 60);
+        root = treap.insert(root, 80);
+
+        treap.preorder(root);
+        System.out.println("====splitted====");
+        TreapNodePair splitted = treap.split(root, 50);
+        treap.preorder(splitted.getFirst());
+        System.out.println("================");
+        treap.preorder(splitted.getSecond());
+        System.out.println("===merged===");
+        root = treap.merge(splitted.getFirst(), splitted.getSecond());
+        treap.preorder(root);
+    }
 }
