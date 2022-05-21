@@ -40,7 +40,6 @@ class TreapTest {
         root = treap.insert(root, 40);
         root = treap.insert(root, 70);
         root = treap.insert(root, 60);
-        root = treap.insert(root, 80);
         treap.preorder(root);
     }
 
