@@ -136,6 +136,7 @@ public class Treap {
         private Integer key;
         private Integer priority = new Random().nextInt() % 100;
         private TreapNode left = null, right = null;
+        private Integer size = 0;
 
         public TreapNode(int key, int priority) {
             this(key);
@@ -148,6 +149,7 @@ public class Treap {
             final String rightKey = right == null ? "NULL" : right.key.toString();
             return "TreapNode{" +
                     "key=" + key +
+                    ", size=" + size +
                     ", priority=" + priority +
                     ", left.key=" + leftKey +
                     ", right.key=" + rightKey +
