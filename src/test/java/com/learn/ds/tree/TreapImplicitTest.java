@@ -1,6 +1,7 @@
 package com.learn.ds.tree;
 
-import com.learn.ds.tree.Treap.TreapNode;
+import com.learn.ds.tree.treap.TreapNode;
+import com.learn.ds.tree.treap.TreapImplicit;
 import org.junit.jupiter.api.Test;
 
 class TreapImplicitTest {

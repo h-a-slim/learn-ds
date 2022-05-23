@@ -1,7 +1,7 @@
 package com.learn.ds.tree;
 
-import com.learn.ds.tree.Treap.TreapNode;
-import com.learn.ds.tree.Treap.TreapNodePair;
+import com.learn.ds.tree.treap.Treap;
+import com.learn.ds.tree.treap.TreapNode;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,66 +21,64 @@ class TreapTest {
     public void shouldPrintInorder() {
         final Treap treap = new Treap();
         TreapNode root = null;
-        root = treap.insert(root, 50);
-        root = treap.insert(root, 30);
-        root = treap.insert(root, 20);
-        root = treap.insert(root, 40);
-        root = treap.insert(root, 70);
-        root = treap.insert(root, 60);
-        root = treap.insert(root, 80);
-        treap.inorder(root);
+        treap.insert(50);
+        treap.insert(30);
+        treap.insert(20);
+        treap.insert(40);
+        treap.insert(70);
+        treap.insert(60);
+        treap.insert(80);
+        treap.inorder();
     }
 
     @Test
     public void shouldPrintPreorder() {
         final Treap treap = new Treap();
         TreapNode root = new TreapNode(50);
-        root = treap.insert(root, 30);
-        root = treap.insert(root, 20);
-        root = treap.insert(root, 40);
-        root = treap.insert(root, 70);
-        root = treap.insert(root, 60);
-        treap.preorder(root);
+        treap.insert(30);
+        treap.insert(20);
+        treap.insert(40);
+        treap.insert(70);
+        treap.insert(60);
+        treap.preorder();
     }
 
     @Test
     public void shouldSplitSimpleTree() {
-        final Treap treap = new Treap();
-        TreapNode root = new TreapNode(50);
-        root = treap.insert(root, 20);
-        root = treap.insert(root, 30);
-        root = treap.insert(root, 40);
-        root = treap.insert(root, 70);
-        root = treap.insert(root, 60);
-        root = treap.insert(root, 80);
+        final Treap treap = new Treap(new TreapNode(50));
+        treap.insert(20);
+        treap.insert(30);
+        treap.insert(40);
+        treap.insert(70);
+        treap.insert(60);
+        treap.insert(80);
 
-        treap.preorder(root);
+        treap.inorder();
         System.out.println("====splitted====");
-        TreapNodePair splitted = treap.split(root, 50);
-        treap.preorder(splitted.getFirst());
+        Treap secondTreap = treap.split(50);
+        treap.inorder();
         System.out.println("================");
-        treap.preorder(splitted.getSecond());
+        secondTreap.inorder();
     }
 
     @Test
     public void shouldMergeSimpleTree() {
-        final Treap treap = new Treap();
-        TreapNode root = new TreapNode(50);
-        root = treap.insert(root, 20);
-        root = treap.insert(root, 30);
-        root = treap.insert(root, 40);
-        root = treap.insert(root, 70);
-        root = treap.insert(root, 60);
-        root = treap.insert(root, 80);
+        final Treap treap = new Treap(new TreapNode(50));
+        treap.insert(20);
+        treap.insert(30);
+        treap.insert(40);
+        treap.insert(70);
+        treap.insert(60);
+        treap.insert(80);
 
-        treap.preorder(root);
+        treap.inorder();
         System.out.println("====splitted====");
-        TreapNodePair splitted = treap.split(root, 50);
-        treap.preorder(splitted.getFirst());
+        Treap secondTreap = treap.split(50);
+        treap.inorder();
         System.out.println("================");
-        treap.preorder(splitted.getSecond());
+        secondTreap.inorder();
         System.out.println("===merged===");
-        root = treap.merge(splitted.getFirst(), splitted.getSecond());
-        treap.preorder(root);
+        treap.merge(secondTreap);
+        treap.inorder();
     }
 }

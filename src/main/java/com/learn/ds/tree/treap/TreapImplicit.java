@@ -1,14 +1,13 @@
-package com.learn.ds.tree;
+package com.learn.ds.tree.treap;
 
-import com.learn.ds.tree.Treap.TreapNode;
-import com.learn.ds.tree.Treap.TreapNodePair;
+import com.learn.ds.util.Pair;
 
 public class TreapImplicit {
 
     public TreapNode insert(TreapNode root, int key, int index) {
         final TreapNode newNode = new TreapNode(key);
         if (root == null) return updateSize(newNode);
-        final TreapNodePair splitted = split(root, index);
+        final Pair<TreapNode> splitted = split(root, index);
         return merge(merge(splitted.getFirst(), newNode), splitted.getSecond());
     }
 
@@ -33,17 +32,17 @@ public class TreapImplicit {
     }
 
 
-    public TreapNodePair split(TreapNode root, int index) {
-        TreapNodePair splitted = new TreapNodePair(null, null);
+    public Pair<TreapNode> split(TreapNode root, int index) {
+        Pair<TreapNode> splitted = new Pair<>(null, null);
         if (root == null) return splitted;
-        if(sizeof(root.getLeft()) + 1 <= index){
-            TreapNodePair splittedRight = split(root.getRight(), index - sizeof(root.getLeft()) - 1);
+        if (sizeof(root.getLeft()) + 1 <= index) {
+            Pair<TreapNode> splittedRight = split(root.getRight(), index - sizeof(root.getLeft()) - 1);
             root.setRight(splittedRight.getFirst());
-            splitted = new TreapNodePair(root, splittedRight.getSecond());
+            splitted = new Pair<>(root, splittedRight.getSecond());
         } else {
-            TreapNodePair splittedLeft = split(root.getLeft(), index);
+            Pair<TreapNode> splittedLeft = split(root.getLeft(), index);
             root.setLeft(splittedLeft.getSecond());
-            splitted = new TreapNodePair(splittedLeft.getFirst(), root);
+            splitted = new Pair<>(splittedLeft.getFirst(), root);
         }
         updateSize(root);
         return splitted;
