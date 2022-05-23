@@ -32,20 +32,16 @@ public class TreapImplicit {
         preorder(root.getRight());
     }
 
-    public TreapNodePair split(TreapNode root, int index) {
-        return split(root, index, 0);
-    }
 
-    private TreapNodePair split(TreapNode root, int index, int countBefore) {
+    public TreapNodePair split(TreapNode root, int index) {
         TreapNodePair splitted = new TreapNodePair(null, null);
         if (root == null) return splitted;
-        int currentIndex = countBefore + sizeof(root.getLeft());
-        if (index <= currentIndex) {
-            TreapNodePair splittedRight = split(root.getRight(), index, currentIndex + 1);
+        if(sizeof(root.getLeft()) + 1 <= index){
+            TreapNodePair splittedRight = split(root.getRight(), index - sizeof(root.getLeft()) - 1);
             root.setRight(splittedRight.getFirst());
             splitted = new TreapNodePair(root, splittedRight.getSecond());
         } else {
-            TreapNodePair splittedLeft = split(root.getLeft(), index, countBefore);
+            TreapNodePair splittedLeft = split(root.getLeft(), index);
             root.setLeft(splittedLeft.getSecond());
             splitted = new TreapNodePair(splittedLeft.getFirst(), root);
         }
