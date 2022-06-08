@@ -23,8 +23,8 @@ public class TreapImplicit implements TreapImplicitOperations{
     }
 
     @Override
-    public void deleteNode(int key) {
-        deleteNodeHelper(root, key);
+    public void deleteNode(int index) {
+        deleteNodeHelper(root, index);
     }
 
     @Override
@@ -56,8 +56,10 @@ public class TreapImplicit implements TreapImplicitOperations{
         return mergeHelper(mergeHelper(splitted.getFirst(), newNode), splitted.getSecond());
     }
 
-    private TreapNode deleteNodeHelper(TreapNode root, int key) {
-        return root;
+    private TreapNode deleteNodeHelper(TreapNode root, int index) {
+        final Pair<TreapNode> splittedRoot = splitHelper(root, index);
+        final Pair<TreapNode> splittedRight = splitHelper(splittedRoot.getSecond(), 1);
+        return mergeHelper(splittedRoot.getFirst(), splittedRight.getSecond());
     }
 
     private void inorderHelper(TreapNode root, int position) {
